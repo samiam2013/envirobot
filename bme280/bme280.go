@@ -10,10 +10,10 @@ import (
 
 // AtmosData is a struct that holds the data from the BME280 sensor
 type AtmosData struct {
-	TempC    float64
-	PressBar float64
-	HumPerc  float64
-	Err      error
+	TempCelcius float64
+	PressHPa    float64
+	Humidity    float64
+	Err         error
 }
 
 func StreamData(c chan AtmosData) {
@@ -36,7 +36,7 @@ func StreamData(c chan AtmosData) {
 			c <- AtmosData{Err: err}
 		}
 
-		data := AtmosData{TempC: t, PressBar: p, HumPerc: h, Err: nil}
+		data := AtmosData{TempCelcius: t, PressHPa: p, Humidity: h, Err: nil}
 		// fmt.Println("data:", data)
 		if data != latestData {
 			c <- data

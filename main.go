@@ -9,36 +9,33 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello, World!")
-
 	AtmosDataC := make(chan bme280.AtmosData)
-	go bme280.StreamData(AtmosDataC)
-
 	MovementC := make(chan movement.Movement)
-	go movement.StreamMovements(MovementC)
-
 	CO2C := make(chan co2.CO2)
+
+	go bme280.StreamData(AtmosDataC)
+	go movement.StreamMovements(MovementC)
 	go co2.StreamLevel(CO2C)
 
 	for {
 		select {
 		case atmosData := <-AtmosDataC:
 			if atmosData.Err != nil {
-				fmt.Println("AtmosDataC error:", atmosData.Err)
+				fmt.Println("AtmosData Error:", atmosData.Err)
 			} else {
-				fmt.Println("AtmosDataC:", atmosData)
+				fmt.Printf("%+v\n", atmosData)
 			}
 		case movement := <-MovementC:
 			if movement.Err != nil {
-				fmt.Println("MovementC error:", movement.Err)
+				fmt.Println("Movement Error:", movement.Err)
 			} else {
-				fmt.Println("MovementC:", movement)
+				fmt.Printf("%+v\n", movement)
 			}
 		case co2 := <-CO2C:
 			if co2.Err != nil {
-				fmt.Println("CO2C error:", co2.Err)
+				fmt.Println("CO2 Error:", co2.Err)
 			} else {
-				fmt.Println("CO2C:", co2)
+				fmt.Printf("%+v\n", co2)
 			}
 		}
 	}
