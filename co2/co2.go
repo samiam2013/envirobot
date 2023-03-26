@@ -7,8 +7,8 @@ import (
 )
 
 type CO2 struct {
-	PPM int
-	Err error
+	PPM int   `json:"ppm"`
+	Err error `json:"err"`
 }
 
 func StreamLevel(c chan CO2) {

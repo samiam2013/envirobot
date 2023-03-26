@@ -10,10 +10,10 @@ import (
 
 // AtmosData is a struct that holds the data from the BME280 sensor
 type AtmosData struct {
-	TempCelcius float64
-	PressHPa    float64
-	Humidity    float64
-	Err         error
+	TempCelcius float64 `json:"temp_celcius"`
+	PressHPa    float64 `json:"press_hpa"`
+	Humidity    float64 `json:"humidity"`
+	Err         error   `json:"err"`
 }
 
 func StreamData(c chan AtmosData) {

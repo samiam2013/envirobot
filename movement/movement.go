@@ -10,8 +10,8 @@ import (
 )
 
 type Movement struct {
-	Time time.Time
-	Err  error
+	Time time.Time `json:"time"`
+	Err  error     `json:"err"`
 }
 
 func StreamMovements(c chan Movement) {
