@@ -1,0 +1,19 @@
+[Unit]
+Description=envirobot environmental sensor data storage service
+ConditionPathExists=/home/sam/git/samiam2013/envirobot
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/home/sam/git/samiam2013/envirobot/
+ExecStart=/usr/local/go/bin/go run .
+StandardOutput=append:/home/sam/git/samiam2013/envirobot/logs/output.log
+StandardError=append:/home/sam/git/samiam2013/envirobot/logs/error.log
+Restart=on-failure
+RestartSec=10
+SyslogIdentifier=envirobot
+
+[Install]
+WantedBy=multi-user.target

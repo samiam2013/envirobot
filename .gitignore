@@ -1,0 +1,15 @@
+# the binary
+envirobot
+
+# any env
+.env
+**/.env
+*.env
+**/*.env
+
+# the log files
+logs/*.log
+
+# the sqlite files 
+sqlite.db
+sqlite.db*

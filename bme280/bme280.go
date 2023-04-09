@@ -23,12 +23,10 @@ func StreamData(c chan AtmosData) {
 	}
 
 	b := bme280.New(d)
-	err = b.Init()
-	if err != nil {
+	if err := b.Init(); err != nil {
 		c <- AtmosData{Err: err}
 	}
 
-	// fmt.Printf("Temp: %fC, Press: %fhPa, Hum: %f%%\n", t, p, h)
 	latestData := AtmosData{}
 	for {
 		t, p, h, err := b.EnvData()
@@ -37,8 +35,8 @@ func StreamData(c chan AtmosData) {
 		}
 
 		data := AtmosData{TempCelcius: t, PressHPa: p, Humidity: h, Err: nil}
-		// fmt.Println("data:", data)
-		if data != latestData {
+		// prssure is sensitive to sound waves probably, so only send if temp or humidity changes
+		if data.TempCelcius != latestData.TempCelcius || data.Humidity != latestData.Humidity {
 			c <- data
 			latestData = data
 		}
