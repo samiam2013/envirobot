@@ -47,7 +47,7 @@ func StreamLevel(c chan CO2) {
 			c <- CO2{PPM: ppm, Err: nil}
 		}
 
-		time.Sleep(1 * time.Second)
+		time.Sleep(1 * time.Minute)
 	}
 
 }

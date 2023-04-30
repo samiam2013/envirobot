@@ -44,5 +44,6 @@ func StreamMovements(c chan Movement) {
 			// 	time.Now().Format(time.RFC3339))
 			c <- Movement{Time: time.Now(), Err: nil}
 		}
+		time.Sleep(1 * time.Minute)
 	}
 }

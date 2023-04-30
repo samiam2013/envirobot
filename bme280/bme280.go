@@ -40,6 +40,6 @@ func StreamData(c chan AtmosData) {
 			c <- data
 			latestData = data
 		}
-		time.Sleep(1 * time.Second)
+		time.Sleep(1 * time.Minute)
 	}
 }
